@@ -8,7 +8,7 @@ spring:
     name: loanflow-backend
 
   datasource:
-    url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:loanflow_db}?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+  url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:loanflow_db}?useSSL=true&requireSSL=true&allowPublicKeyRetrieval=true&serverTimezone=UTC
     username: ${DB_USER:loanflow_user}
     password: ${DB_PASSWORD:LoanFlowSecurePassword2026!}
     driver-class-name: com.mysql.cj.jdbc.Driver
