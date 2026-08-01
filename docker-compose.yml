@@ -1,0 +1,86 @@
+version: '3.8'
+
+services:
+  # MySQL Database Service
+  mysql_db:
+    image: mysql:8.0.36
+    container_name: loanflow_mysql
+    restart: always
+    environment:
+      MYSQL_DATABASE: loanflow_db
+      MYSQL_USER: loanflow_user
+      MYSQL_PASSWORD: LoanFlowSecurePassword2026!
+      MYSQL_ROOT_PASSWORD: RootSecurePassword2026!
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./backend/src/main/resources/db/schema.sql:/docker-entrypoint-initdb.d/1_schema.sql
+      - ./backend/src/main/resources/db/data.sql:/docker-entrypoint-initdb.d/2_data.sql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - loanflow_network
+
+  # Database Web Management UI (Adminer)
+  adminer:
+    image: adminer:latest
+    container_name: loanflow_adminer
+    restart: always
+    ports:
+      - "8081:8080"
+    depends_on:
+      - mysql_db
+    networks:
+      - loanflow_network
+
+  # Spring Boot Java 21 Backend Service
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: loanflow_backend
+    restart: always
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      DB_HOST: mysql_db
+      DB_PORT: 3306
+      DB_NAME: loanflow_db
+      DB_USER: loanflow_user
+      DB_PASSWORD: LoanFlowSecurePassword2026!
+      JWT_SECRET: 404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
+      GEMINI_API_KEY: ${GEMINI_API_KEY}
+    depends_on:
+      mysql_db:
+        condition: service_healthy
+    networks:
+      - loanflow_network
+
+  # React 19 Frontend Web Application
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    container_name: loanflow_frontend
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+    depends_on:
+      - backend
+    networks:
+      - loanflow_network
+
+volumes:
+  mysql_data:
+
+networks:
+  loanflow_network:
+    driver: bridge

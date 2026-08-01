@@ -1,0 +1,6 @@
+{
+  "name": "LoanFlow – AI-Powered Digital Loan Approval System",
+  "description": "Enterprise-grade digital loan management system with AI eligibility prediction, document verification, fraud detection, and role-based workflows.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
