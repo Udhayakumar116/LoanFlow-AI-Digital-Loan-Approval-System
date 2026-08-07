@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
+﻿import React, { useEffect, useState } from 'react';
 import { api } from '../services/api';
+import { formatINR } from '../utils/currency';
 import { LoanApplication } from '../types';
 import { FileText, CheckCircle2, Clock, AlertCircle, Download, Sparkles, ShieldCheck } from 'lucide-react';
 
@@ -57,7 +58,7 @@ export const LoanTrackingPage: React.FC = () => {
                 </span>
               </div>
               <p className="text-sm font-bold mt-1">{loan.productName}</p>
-              <p className="text-xs text-slate-400">${loan.requestedAmount.toLocaleString()} • {loan.tenureMonths} mos</p>
+              <p className="text-xs text-slate-400">{formatINR(loan.requestedAmount)} • {loan.tenureMonths} mos</p>
             </div>
           ))}
         </div>
@@ -139,7 +140,7 @@ export const LoanTrackingPage: React.FC = () => {
                 <ShieldCheck className="w-5 h-5 text-emerald-400" />
                 <h3 className="text-base font-bold text-white">Official Loan Sanction Letter</h3>
               </div>
-              <button onClick={() => setShowSanctionLetter(false)} className="text-slate-400 hover:text-white">✕</button>
+              <button onClick={() => setShowSanctionLetter(false)} className="text-slate-400 hover:text-white">âœ•</button>
             </div>
 
             <div className="p-4 rounded-xl bg-slate-950 font-serif text-xs leading-relaxed space-y-3 text-slate-300">
@@ -152,10 +153,10 @@ export const LoanTrackingPage: React.FC = () => {
                 We are pleased to inform you that your application for <strong>{selectedLoan.productName}</strong> has been <strong>SANCTIONED</strong> based on automated Gemini AI credit evaluation and risk review.
               </p>
               <div className="font-sans grid grid-cols-2 gap-2 p-3 bg-slate-900 rounded border border-slate-800 text-[11px]">
-                <div>Sanctioned Amount: <strong>${selectedLoan.requestedAmount.toLocaleString()}</strong></div>
+                <div>Sanctioned Amount: <strong>{formatINR(selectedLoan.requestedAmount)}</strong></div>
                 <div>Tenure: <strong>{selectedLoan.tenureMonths} Months</strong></div>
                 <div>Interest Rate: <strong>{selectedLoan.interestRate}% p.a.</strong></div>
-                <div>Monthly EMI: <strong>${selectedLoan.monthlyEmi.toLocaleString()}</strong></div>
+                <div>Monthly EMI: <strong>{formatINR(selectedLoan.monthlyEmi)}</strong></div>
               </div>
               <p className="text-[10px] text-slate-400">Authorized Signatory: Branch Manager David Miller • LoanFlow Digital Enterprise</p>
             </div>
@@ -180,3 +181,6 @@ export const LoanTrackingPage: React.FC = () => {
     </div>
   );
 };
+
+
+

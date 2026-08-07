@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+﻿import React, { useEffect, useState } from 'react';
+import { formatINR } from '../utils/currency';
 import { useAuth } from '../context/AuthContext';
 import { api } from '../services/api';
 import { LoanApplication, LoanProduct } from '../types';
@@ -89,7 +90,7 @@ export const DashboardPage: React.FC = () => {
         <div className="p-5 rounded-2xl bg-slate-900/90 border border-slate-800 shadow-md flex items-center justify-between">
           <div>
             <p className="text-xs font-semibold text-slate-400">Requested Value</p>
-            <p className="text-2xl font-bold text-white mt-1">${(totalRequested / 1000).toFixed(0)}k</p>
+            <p className="text-2xl font-bold text-white mt-1">{formatINR(totalRequested)}</p>
             <span className="text-[11px] text-slate-400">Across products</span>
           </div>
           <div className="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
@@ -159,11 +160,11 @@ export const DashboardPage: React.FC = () => {
                 <div className="grid grid-cols-3 gap-2 text-xs text-slate-400 bg-slate-950/60 p-3 rounded-xl border border-slate-800">
                   <div>
                     <p className="text-[10px] uppercase font-semibold text-slate-400">Requested Amount</p>
-                    <p className="text-sm font-bold text-slate-200">${loan.requestedAmount.toLocaleString()}</p>
+                    <p className="text-sm font-bold text-slate-200">{formatINR(loan.requestedAmount)}</p>
                   </div>
                   <div>
                     <p className="text-[10px] uppercase font-semibold text-slate-400">Monthly EMI</p>
-                    <p className="text-sm font-bold text-slate-200">${loan.monthlyEmi.toLocaleString()}/mo</p>
+                    <p className="text-sm font-bold text-slate-200">{formatINR(loan.monthlyEmi)}/mo</p>
                   </div>
                   <div>
                     <p className="text-[10px] uppercase font-semibold text-slate-400">AI Eligibility Score</p>
@@ -199,7 +200,7 @@ export const DashboardPage: React.FC = () => {
                   <span className="text-xs font-bold text-emerald-400">{prod.interestRate}% p.a.</span>
                 </div>
                 <p className="text-[11px] text-slate-400 leading-snug">
-                  Limit up to ${prod.maxAmount.toLocaleString()} ({prod.minTenure}-{prod.maxTenure} months)
+                  Limit up to {formatINR(prod.maxAmount)} ({prod.minTenure}-{prod.maxTenure} months)
                 </p>
                 <div className="pt-2 flex justify-end">
                   <Link
@@ -219,3 +220,5 @@ export const DashboardPage: React.FC = () => {
     </div>
   );
 };
+
+

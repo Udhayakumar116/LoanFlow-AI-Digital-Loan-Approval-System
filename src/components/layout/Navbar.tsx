@@ -1,11 +1,11 @@
 import React from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { UserRole } from '../../types';
-import { Shield, Bell, User as UserIcon, Code2, Sparkles, ChevronDown } from 'lucide-react';
+import { Shield, Bell, Code2, Sparkles } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export const Navbar: React.FC = () => {
-  const { user, role, switchRole } = useAuth();
+  const { user, role } = useAuth();
 
   const roleLabels: Record<UserRole, { label: string; badgeClass: string }> = {
     ROLE_CUSTOMER: { label: 'Customer', badgeClass: 'bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300' },
@@ -17,7 +17,7 @@ export const Navbar: React.FC = () => {
   return (
     <header className="sticky top-0 z-40 bg-slate-900 text-white border-b border-slate-800 shadow-md">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-        
+
         {/* Brand Logo */}
         <div className="flex items-center space-x-3">
           <Link to="/" className="flex items-center space-x-2.5">
@@ -35,7 +35,7 @@ export const Navbar: React.FC = () => {
           </Link>
         </div>
 
-        {/* Quick Links & Role Switcher */}
+        {/* Quick Links & Role Badge */}
         <div className="flex items-center space-x-4 sm:space-x-6">
           <Link
             to="/architecture"
@@ -45,36 +45,12 @@ export const Navbar: React.FC = () => {
             <span>Architecture & Specs</span>
           </Link>
 
-          {/* Role Switcher Pill */}
-          <div className="relative group">
-            <div className="flex items-center space-x-2 px-3 py-1.5 rounded-lg bg-slate-800/90 border border-slate-700/80 cursor-pointer hover:border-slate-600 transition">
-              <Sparkles className="w-4 h-4 text-amber-400 animate-pulse" />
-              <div className="text-left hidden sm:block">
-                <p className="text-[10px] uppercase font-semibold tracking-wider text-slate-400">Role Persona</p>
-                <p className="text-xs font-medium text-slate-200">{roleLabels[role].label}</p>
-              </div>
-              <ChevronDown className="w-3.5 h-3.5 text-slate-400" />
-            </div>
-
-            {/* Dropdown Menu */}
-            <div className="absolute right-0 mt-1 w-52 bg-slate-800 border border-slate-700 rounded-xl shadow-xl py-2 hidden group-hover:block z-50 animate-in fade-in slide-in-from-top-1 duration-150">
-              <div className="px-3 py-1.5 border-b border-slate-700/60 text-[11px] font-semibold text-slate-400 uppercase">
-                Switch Role View
-              </div>
-              {(Object.keys(roleLabels) as UserRole[]).map((r) => (
-                <button
-                  key={r}
-                  onClick={() => switchRole(r)}
-                  className={`w-full text-left px-3 py-2 text-xs font-medium flex items-center justify-between hover:bg-slate-700/70 ${
-                    role === r ? 'text-blue-400 font-semibold bg-blue-500/10' : 'text-slate-300'
-                  }`}
-                >
-                  <span>{roleLabels[r].label}</span>
-                  <span className={`text-[10px] px-1.5 py-0.5 rounded ${roleLabels[r].badgeClass}`}>
-                    {r.replace('ROLE_', '')}
-                  </span>
-                </button>
-              ))}
+          {/* Static Role Badge (no switching) */}
+          <div className="flex items-center space-x-2 px-3 py-1.5 rounded-lg bg-slate-800/90 border border-slate-700/80">
+            <Sparkles className="w-4 h-4 text-amber-400" />
+            <div className="text-left hidden sm:block">
+              <p className="text-[10px] uppercase font-semibold tracking-wider text-slate-400">Signed in as</p>
+              <p className="text-xs font-medium text-slate-200">{roleLabels[role].label}</p>
             </div>
           </div>
 

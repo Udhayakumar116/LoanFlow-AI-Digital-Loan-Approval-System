@@ -48,7 +48,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [role, setRole] = useState<UserRole>('ROLE_CUSTOMER');
-  const [user, setUser] = useState<User | null>(defaultUsers['ROLE_CUSTOMER']);
+  const [user, setUser] = useState<User | null>(null);
 
   const switchRole = (newRole: UserRole) => {
     setRole(newRole);

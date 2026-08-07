@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { Calculator, DollarSign, Percent, Calendar, Download } from 'lucide-react';
+﻿import React, { useState } from 'react';
+import { Calculator, IndianRupee, Percent, Calendar, Download } from 'lucide-react';
+import { formatINR } from '../utils/currency';
 
 export const EMICalculatorPage: React.FC = () => {
   const [amount, setAmount] = useState<number>(500000);
@@ -36,8 +37,8 @@ export const EMICalculatorPage: React.FC = () => {
         <div className="space-y-6 bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl">
           <div>
             <div className="flex justify-between text-xs font-bold text-white mb-2">
-              <label>Loan Amount ($)</label>
-              <span className="text-blue-400">${amount.toLocaleString()}</span>
+              <label>Loan Amount (₹)</label>
+              <span className="text-blue-400">{formatINR(amount)}</span>
             </div>
             <input
               type="range"
@@ -89,17 +90,17 @@ export const EMICalculatorPage: React.FC = () => {
             <h2 className="text-xs font-bold uppercase text-slate-400 tracking-wider">EMI Breakdown</h2>
             <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 text-center">
               <p className="text-xs text-slate-400">Monthly EMI Payment</p>
-              <p className="text-3xl font-extrabold text-blue-400 mt-1">${emi.toLocaleString()}</p>
+              <p className="text-3xl font-extrabold text-blue-400 mt-1">{formatINR(emi)}</p>
             </div>
 
             <div className="grid grid-cols-2 gap-3 text-xs">
               <div className="p-3 rounded-xl bg-slate-950 border border-slate-800">
                 <span className="text-slate-400 text-[10px]">Total Principal</span>
-                <p className="font-bold text-white mt-0.5">${amount.toLocaleString()}</p>
+                <p className="font-bold text-white mt-0.5">{formatINR(amount)}</p>
               </div>
               <div className="p-3 rounded-xl bg-slate-950 border border-slate-800">
                 <span className="text-slate-400 text-[10px]">Total Interest</span>
-                <p className="font-bold text-emerald-400 mt-0.5">${totalInterest.toLocaleString()}</p>
+                <p className="font-bold text-emerald-400 mt-0.5">{formatINR(totalInterest)}</p>
               </div>
             </div>
 
@@ -128,3 +129,5 @@ export const EMICalculatorPage: React.FC = () => {
     </div>
   );
 };
+
+
