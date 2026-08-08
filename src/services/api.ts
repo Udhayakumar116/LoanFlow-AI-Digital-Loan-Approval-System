@@ -1,7 +1,6 @@
 import { LoanApplication, LoanProduct, ManagerAnalytics } from '../types';
 
-const API_BASE = 'http://localhost:8080/api/v1';
-
+const API_BASE = 'https://loanflow-ai-digital-loan-approval-system.onrender.com/api/v1';
 export const api = {
   async getProducts(): Promise<LoanProduct[]> {
     const res = await fetch(`${API_BASE}/products`);
