@@ -1,2 +1,8 @@
 D:\AI Projects\loanflow-ai-powered-digital-loan-approval-system\backend\src\main\java\com\loanflow\config\SecurityConfig.java
+D:\AI Projects\loanflow-ai-powered-digital-loan-approval-system\backend\src\main\java\com\loanflow\controller\LoanApplicationController.java
+D:\AI Projects\loanflow-ai-powered-digital-loan-approval-system\backend\src\main\java\com\loanflow\controller\LoanProductController.java
+D:\AI Projects\loanflow-ai-powered-digital-loan-approval-system\backend\src\main\java\com\loanflow\entity\LoanApplication.java
+D:\AI Projects\loanflow-ai-powered-digital-loan-approval-system\backend\src\main\java\com\loanflow\entity\LoanProduct.java
 D:\AI Projects\loanflow-ai-powered-digital-loan-approval-system\backend\src\main\java\com\loanflow\LoanFlowApplication.java
+D:\AI Projects\loanflow-ai-powered-digital-loan-approval-system\backend\src\main\java\com\loanflow\repository\LoanApplicationRepository.java
+D:\AI Projects\loanflow-ai-powered-digital-loan-approval-system\backend\src\main\java\com\loanflow\repository\LoanProductRepository.java

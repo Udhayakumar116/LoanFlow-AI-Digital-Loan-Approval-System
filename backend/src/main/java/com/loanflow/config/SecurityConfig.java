@@ -36,13 +36,15 @@ public class SecurityConfig {
             .cors(cors -> cors.configurationSource(corsConfigurationSource()))
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers(
-                    "/api/v1/auth/**",
-                    "/v3/api-docs/**",
-                    "/swagger-ui/**",
-                    "/swagger-ui.html",
-                    "/actuator/health"
-                ).permitAll()
+               .requestMatchers(
+    "/auth/**",
+    "/products/**",
+    "/loans/**",
+    "/v3/api-docs/**",
+    "/swagger-ui/**",
+    "/swagger-ui.html",
+    "/actuator/health"
+).permitAll()
                 .requestMatchers("/api/v1/customer/**").hasRole("CUSTOMER")
                 .requestMatchers("/api/v1/officer/**").hasRole("LOAN_OFFICER")
                 .requestMatchers("/api/v1/manager/**").hasRole("MANAGER")

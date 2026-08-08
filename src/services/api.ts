@@ -1,20 +1,22 @@
 import { LoanApplication, LoanProduct, ManagerAnalytics } from '../types';
 
+const API_BASE = 'http://localhost:8080/api/v1';
+
 export const api = {
   async getProducts(): Promise<LoanProduct[]> {
-    const res = await fetch('/api/products');
+    const res = await fetch(`${API_BASE}/products`);
     if (!res.ok) throw new Error('Failed to fetch loan products');
     return res.json();
   },
 
   async getLoans(): Promise<LoanApplication[]> {
-    const res = await fetch('/api/loans');
+    const res = await fetch(`${API_BASE}/loans`);
     if (!res.ok) throw new Error('Failed to fetch loan applications');
     return res.json();
   },
 
   async applyLoan(payload: Partial<LoanApplication>): Promise<LoanApplication> {
-    const res = await fetch('/api/loans/apply', {
+    const res = await fetch(`${API_BASE}/loans/apply`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload),

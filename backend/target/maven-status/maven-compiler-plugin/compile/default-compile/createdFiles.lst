@@ -1,0 +1,8 @@
+com\loanflow\LoanFlowApplication.class
+com\loanflow\entity\LoanApplication.class
+com\loanflow\repository\LoanApplicationRepository.class
+com\loanflow\config\SecurityConfig.class
+com\loanflow\controller\LoanProductController.class
+com\loanflow\repository\LoanProductRepository.class
+com\loanflow\entity\LoanProduct.class
+com\loanflow\controller\LoanApplicationController.class

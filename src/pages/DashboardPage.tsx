@@ -197,10 +197,10 @@ export const DashboardPage: React.FC = () => {
               <div key={prod.id} className="p-4 rounded-2xl bg-slate-900 border border-slate-800 space-y-2">
                 <div className="flex items-center justify-between">
                   <h3 className="text-xs font-bold text-white">{prod.name}</h3>
-                  <span className="text-xs font-bold text-emerald-400">{prod.interestRate}% p.a.</span>
+                  <span className="text-xs font-bold text-emerald-400">{prod.interestRateAnnual}% p.a.</span>
                 </div>
                 <p className="text-[11px] text-slate-400 leading-snug">
-                  Limit up to {formatINR(prod.maxAmount)} ({prod.minTenure}-{prod.maxTenure} months)
+                  Limit up to {formatINR(prod.maxAmount)} ({prod.minTenureMonths}-{prod.maxTenureMonths} months)
                 </p>
                 <div className="pt-2 flex justify-end">
                   <Link
@@ -220,5 +220,3 @@ export const DashboardPage: React.FC = () => {
     </div>
   );
 };
-
-
